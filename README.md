@@ -1,4 +1,38 @@
+## Task Overview
+You need to design one simple single page and use Google Place Autocomplete to find places and show at map. the following requirements are compulsory.
+
+1. The textbox must be an autocomplete action and get result from this API
+(https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete)
+2. You must use redux to store result and display all searches that user tries
+3. You need to use one of following method in combination with Redux
+    - Redux Thunk
+    - Redux Promise
+    - Redux Saga
+    - Redux-Observable Epics
+4. For UI you need to use Material Design Kit ([https://github.com/mui-](https://github.com/mui-)
+org/material-ui), make it simple and user friendly, use your creativity as Front-end developer
+5. Code structure is compulsory, use the best approach to manage folders,
+codes, naming and make sure it would be scalable.
+The result of this assignment demonstrate that you are capable to design scalable structure for React project. Make sure use your skills and talent to implement this assignment.
+Using ES6, High Order Components, Redux-Observable Epic and great functional programming can increase your chance to get better score.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+
+## Development Log
+
+### Tuesday, 14th December 2021
+1. Started a plain react + redux project 
+2. Installed relevant dependencies
+    1. Redux
+    2. Material UI
+    3. Google Maps React
+3. Created API key for Maps JavaScript API
+4. Created Web Page which loads the Maps API
+5. Having trouble implementing the Autocomplete feature
+
+## Challenges
+
+- Base knowledge on react and very limited understanding on Redux becomes a bottleneck.
+  - Therefore not a lot of code writing today, and more on practicing on the React framework
 
 ## Available Scripts
 
