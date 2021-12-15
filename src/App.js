@@ -15,6 +15,7 @@ export class MapContainer extends React.Component {
     super(props);
 
     this.state = {
+      placeId: '',
       location: '',
       query: ''
     };
@@ -37,7 +38,7 @@ export class MapContainer extends React.Component {
     // Avoid paying for data that you don't need by restricting the set of
     // place fields that are returned to just the address components and formatted
     // address.
-    this.autocomplete.setFields(['address_components', 'formatted_address']);
+    this.autocomplete.setFields(['place_id','address_components', 'formatted_address']);
     // Fire Event when a suggested name is selected
     this.autocomplete.addListener('place_changed', this.handleSelection);
   }
@@ -48,19 +49,23 @@ export class MapContainer extends React.Component {
     // Should store the selected place history using Redux
     const addressObject = this.autocomplete.getPlace();
     const address = addressObject.address_components;
+    const point = address[0].place_id;
 
     console.log(addressObject);
     console.log(address);
+
     // Check if address is valid
     if (address) {
       // Set State
       this.setState(
         {
+          placeId: addressObject.place_id, // doesnt seem to fetch the place id 
           location: address[0].long_name,
           query: addressObject.formatted_address,
         }
       );
     }
+    //window.alert(this.state.placeId);
   }
 
   // handleMarker = () => {
@@ -72,7 +77,7 @@ export class MapContainer extends React.Component {
     return (
       <div>
         {/* <SearchBox /> */}
-        <SearchBar id="autocomplete" placeholder="Search a location"  value={this.state.query}/>
+        <SearchBar id="autocomplete" placeholder="Search a location"  value={this.state.location}/>
         <Script
           url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY&libraries=places"
           onLoad={this.handleScriptLoad}
@@ -83,9 +88,6 @@ export class MapContainer extends React.Component {
           google={this.props.google}
           zoom={14}
           style={mapStyles}
-          fullscreenControl={true}
-          zoomControl={true}
-          streetViewControl={true}
           // Set the map centre as KL
           initialCenter={
             {

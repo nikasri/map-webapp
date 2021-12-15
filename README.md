@@ -29,10 +29,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4. Created Web Page which loads the Maps API
 5. Having trouble implementing the Autocomplete feature
 
+### Wednesday, 15th December 2021
+1. Added functioning autocomplete integration
+2. Incorporated Material UI search bar using an exported library
+3. Currently working on the marker to pinpoint selected location on the map.
+4. Figuring out how to extract data from the selected location in order to pass the info to the Marker component.
+
 ## Challenges
 
 - Base knowledge on react and very limited understanding on Redux becomes a bottleneck.
   - Therefore not a lot of code writing today, and more on practicing on the React framework
+- Unsure how to create interactions between components in React. Need more guide and practice on it.
 
 ## Available Scripts
 
