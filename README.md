@@ -31,7 +31,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Wednesday, 15th December 2021
 1. Added functioning autocomplete integration
-2. Incorporated Material UI search bar using an exported library
+2. Incorporated Material UI search bar using an imported library
 3. Currently working on the marker to pinpoint selected location on the map.
 4. Figuring out how to extract data from the selected location in order to pass the info to the Marker component.
 
