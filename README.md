@@ -35,6 +35,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 3. Currently working on the marker to pinpoint selected location on the map.
 4. Figuring out how to extract data from the selected location in order to pass the info to the Marker component.
 
+### Thursday 16th December 2021
+
+1. A lot of time were spent today understanding the Map API itself to extract the relevant data from the selected location, so the information can be used to reflect the location on the map. Some time spent doing tutorials on the React framework (and JavaScript) since a lot of them were covered during the technical training at very **threatening** pace.  
+2. There is a couple of bugs I realise such as the code breaking when the page is refreshed, works fine again after a few seconds. Might be because the lifecycle methods are not implemented correctly. I could use a lot more reading on that to be honest.
+3. Selecting the place in the suggestion would reflect on the map. The map would pan to the location with the marker as its centre. Hence I think the first objective of the page has been fulfilled although I do think touch ups are needed on the design and code structuring.
+4. Apart from that, storing searched location using Redux is still something I need a lot more work on since my understanding of React is fairly limited. Hence, applying Redux on top this project is quite the challenge.
+
 ## Challenges
 
 - Base knowledge on react and very limited understanding on Redux becomes a bottleneck.

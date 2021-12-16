@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useRef, useState } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { InfoWindow, Map, Marker,GoogleApiWrapper} from 'google-maps-react';
 import SearchBar from 'material-ui-search-bar';
 import Script from 'react-load-script';
 
@@ -9,24 +9,29 @@ const mapStyles = {
   height: '100%'
 };
 
+const google = window.google;
 
 export class MapContainer extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
+      name: '',
+      myLatLng:'',
+      lat: '',
+      lng:'',
       placeId: '',
       location: '',
-      query: ''
     };
   }
 
+  
   handleScriptLoad = () => {
     // Declare Options For Autocomplete
     const options = {
       // Location biasing to Malaysia
       componentRestrictions: { country: "my" },
-      types: ['address'],
+      types: ['establishment'],
       fields: ['address_components', 'geometry', 'name']
       }
 
@@ -35,9 +40,7 @@ export class MapContainer extends React.Component {
     // Initialize Google Autocomplete
     this.autocomplete = new google.maps.places.Autocomplete(input,options);
 
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components and formatted
-    // address.
+    // Restricting the set of place fields that are returned 
     this.autocomplete.setFields(['place_id','address_components', 'formatted_address']);
     // Fire Event when a suggested name is selected
     this.autocomplete.addListener('place_changed', this.handleSelection);
@@ -45,44 +48,39 @@ export class MapContainer extends React.Component {
 
 
   handleSelection = () => {
-    
     // Should store the selected place history using Redux
     const addressObject = this.autocomplete.getPlace();
     const address = addressObject.address_components;
-    const point = address[0].place_id;
-
-    console.log(addressObject);
-    console.log(address);
+    const lat = addressObject.geometry.location.lat();
+    const lng = addressObject.geometry.location.lng();
+    const LatLng = { lat: lat, lng: lng };
+    
 
     // Check if address is valid
     if (address) {
       // Set State
       this.setState(
         {
-          placeId: addressObject.place_id, // doesnt seem to fetch the place id 
-          location: address[0].long_name,
-          query: addressObject.formatted_address,
+          myLatLng: LatLng,
+          name: addressObject.name,
+          lat: addressObject.geometry.location.lat(),
+          lng: addressObject.geometry.location.lng(),
         }
       );
     }
-    //window.alert(this.state.placeId);
+    console.log("Latitude: ", this.state.lat);
+    console.log("Longitude: ", this.state.lng);
+    console.log(addressObject.name);
   }
-
-  // handleMarker = () => {
-  //   const marker = new google.maps.Marker({map: map, draggable: false});
-  //   const location = "";
-  // }
 
   render() {
     return (
       <div>
-        {/* <SearchBox /> */}
-        <SearchBar id="autocomplete" placeholder="Search a location"  value={this.state.location}/>
+        <SearchBar id="autocomplete" placeholder="Search a location"  value={this.state.name}/>
         <Script
           url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY&libraries=places"
           onLoad={this.handleScriptLoad}
         />
-        
       <div>
         <Map
           google={this.props.google}
@@ -95,32 +93,19 @@ export class MapContainer extends React.Component {
               lng: 101.711861
             }
           }
-        />
+          center={ this.state.myLatLng }
+        >
+          <Marker onClick={this.onMarkerClick}
+                position={ this.state.myLatLng }
+          />
+          
+        </Map>
       </div>
       
       </div>
     );
   }
 }
-
-// function renderAddress(place) {
-//   map.setCenter(place.geometry.location);
-//   marker.setPosition(place.geometry.location);
-//   marker.setVisible(true);
-// }
-const google = window.google;
-// const input = document.getElementById("autocomplete");
-
-// const options = {
-//   types: ['establishment'],
-//   fields: ['place_id', 'geometry', 'name']
-//   }
-
-// let autocomplete;
-
-// function initAutocomplete() {
-//   autocomplete = new google.maps.places.Autocomplete(input);
-// }
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY'
