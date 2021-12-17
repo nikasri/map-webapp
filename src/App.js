@@ -1,11 +1,9 @@
 import React from 'react';
-import { useRef, useState } from 'react';
 import { InfoWindow, Map, Marker,GoogleApiWrapper} from 'google-maps-react';
 import SearchBar from 'material-ui-search-bar';
 import Script from 'react-load-script';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
-import { Provider } from 'react-redux';
 
 const mapStyles = {
   width: '100%',
