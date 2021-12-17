@@ -3,12 +3,14 @@ import { useRef, useState } from 'react';
 import { InfoWindow, Map, Marker,GoogleApiWrapper} from 'google-maps-react';
 import SearchBar from 'material-ui-search-bar';
 import Script from 'react-load-script';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux';
 
 const mapStyles = {
   width: '100%',
   height: '100%'
 };
-
 const google = window.google;
 
 export class MapContainer extends React.Component {
@@ -71,6 +73,9 @@ export class MapContainer extends React.Component {
     console.log("Latitude: ", this.state.lat);
     console.log("Longitude: ", this.state.lng);
     console.log(addressObject.name);
+    // Assign to object so it can be pushed into Redux store(?)
+    recentSearch = addressObject.name;
+    // turn this function into an action creator?
   }
 
   render() {
@@ -106,6 +111,29 @@ export class MapContainer extends React.Component {
     );
   }
 }
+
+const defaultState = {
+  history : []
+};
+
+var recentSearch = '';
+
+const searchReducer = (state = defaultState, action) => {
+  if (!recentSearch === '') return state.concat(action.recentSearch);
+  else return state;
+}
+
+// action creator functions return action object
+const searchAction = recentSearch => {
+  return {
+    //history : add
+    recentSearch
+  };
+}
+
+const store = createStore(searchReducer, applyMiddleware(thunk));
+//store.subscribe(MapContainer.handleSelection())
+
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY'
