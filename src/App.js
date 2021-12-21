@@ -1,6 +1,5 @@
 import React from 'react';
-import { InfoWindow, Map, Marker,GoogleApiWrapper} from 'google-maps-react';
-import SearchBar from 'material-ui-search-bar';
+import { Map, Marker,GoogleApiWrapper} from 'google-maps-react';
 import Script from 'react-load-script';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
@@ -79,12 +78,14 @@ export class MapContainer extends React.Component {
   render() {
     return (
       <div>
-        <SearchBar id="autocomplete" placeholder="Search a location"  value={this.state.name}/>
-        <Script
+        {/* <SearchBar id="autocomplete" placeholder="Search a location"  value={this.state.name}/> */}
+        <input class="form-control" id="autocomplete" placeholder="Search location"></input>
+        
+      <div>
+      <Script
           url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY&libraries=places"
           onLoad={this.handleScriptLoad}
-        />
-      <div>
+        />  
         <Map
           google={this.props.google}
           zoom={14}
