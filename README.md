@@ -45,6 +45,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Friday 17th December 2021
 Teaching myself Redux to implement the search history. Didn't really work as the concept doesn't stick. Could use more examples of the use within other project instead of code snippets I find on the internet.
 
+### Thursday 23rd December 2021
+Implemented redux to store searched values.
+Refactored the from a single JS file into several components.
+Working on UI to display the recent searches. Having problems fetching values back from store. 
+
 ## Challenges
 
 - Base knowledge on react and very limited understanding on Redux becomes a bottleneck.
