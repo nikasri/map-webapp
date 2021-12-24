@@ -1,7 +1,8 @@
 import React from 'react';
 import { Map, Marker,GoogleApiWrapper} from 'google-maps-react';
 import Script from 'react-load-script';
-
+import SearchInput from './SearchInput';
+import RecentComponent from "./RecentComponent"
 
 const mapStyles = {
   width: '100%',
@@ -13,6 +14,8 @@ export class MapContainer extends React.Component {
   constructor(props){
     super(props);
 
+    this.handleHistory = this.handleHistory.bind(this);
+
     this.state = {
       name: '',
       myLatLng:'',
@@ -20,10 +23,16 @@ export class MapContainer extends React.Component {
       lng:'',
       placeId: '',
       location: '',
+      showHistory: false,
     };
   }
 
-  
+  handleHistory() {
+    this.setState({
+      showHistory: !this.state.showHistory
+    })
+  }
+
   handleScriptLoad = () => {
     // Declare Options For Autocomplete
     const options = {
@@ -77,17 +86,16 @@ export class MapContainer extends React.Component {
   render() {
     return (
       <div>
-        <input class="form-control" id="autocomplete" placeholder="Search location"></input>
-      <div>
-      <Script
-          url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY&libraries=places"
-          onLoad={this.handleScriptLoad}
-        /> 
-      <div>
+        <SearchInput handler = {this.handleHistory}/>
+        <div>
+        {this.state.showHistory && <RecentComponent/>}
+        <Script
+            url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZeg__wAYOzCyQ4hr9IH_VArIV0vs5orY&libraries=places"
+            onLoad={this.handleScriptLoad}
+            />  
+        </div>
+        <div> 
 
-      </div>
-      
-        
         <Map
           google={this.props.google}
           zoom={14}
@@ -101,14 +109,14 @@ export class MapContainer extends React.Component {
           }
           center={ this.state.myLatLng }
         >
-          <Marker onClick={this.onMarkerClick}
-                position={ this.state.myLatLng }
+          <Marker 
+              onClick={this.onMarkerClick}
+              position={ this.state.myLatLng }
           />
-          
         </Map>
+        </div>
       </div>
-      
-      </div>
+          
     );
   }
 }

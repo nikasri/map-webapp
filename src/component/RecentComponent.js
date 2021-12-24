@@ -1,23 +1,34 @@
-import React from "react";
+import { store } from '../state/store'
+import * as React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import Grid from '@mui/material/Grid';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
-// just access the store from here
+function RecentComponent(){
+    // Get current state from store
+    const recentSearch = store.getState().search.arr.reverse();
+    const renderRecent = recentSearch.map(i=>
+        <ListItem 
+            secondaryAction={
+            <IconButton edge="end" aria-label="delete">
+              <ClearOutlinedIcon />
+            </IconButton>
+          }>
+            <ListItemText
+            primary={i}
+            />
 
-function RecentComponent(props){
-    const recentSearch = Array.from(props.recent);
-    console.log("Recent: " ,recentSearch)
-    const renderRecent = recentSearch.map(i=><li>{i}</li>);  
+        </ListItem>);
+
     return (
-        // <div class="dropdown">
-        //     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        //         Recent search
-        //     </button>
-        //     <ul>{renderRecent}</ul>
-        // </div>
-        <div>
-            <ul>
+        <Grid>
+            <List>
                 {renderRecent}
-            </ul>
-        </div>
+            </List>
+        </Grid>
   );
 }
 
