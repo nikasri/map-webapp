@@ -50,6 +50,11 @@ Implemented redux to store searched values.
 Refactored the from a single JS file into several components.
 Working on UI to display the recent searches. Having problems fetching values back from store. 
 
+### Friday 24th December 2021
+1. Worked on retrieving values from Redux store. Recent searches now displayed with a UI which can be toggled with a history button embedded into the search bar.
+2. Search bar is now its own component for better code encapsulation. 
+3. Both the recent searches and search bar are updated to conform with Material UI.
+
 ## Challenges
 
 - Base knowledge on react and very limited understanding on Redux becomes a bottleneck.
