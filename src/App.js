@@ -15,7 +15,7 @@ function App() {
   // binding all the actions creators to the dispatch
   const {searchAction} = bindActionCreators(actionCreators, dispatch)
   return (
-    <div className="App">
+    <div title='MapApp'className="App">
       {/* Render MapContainer while also passing the searchAction action creator  as props */}
       <MapContainer action={searchAction}/>
 

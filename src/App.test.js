@@ -11,5 +11,5 @@ test('renders learn react link', () => {
     </Provider>
   );
 
-  expect(screen.getByTitle('Search')).toBeInTheDocument();
+  expect(screen.getByTitle('MapApp')).toBeInTheDocument();
 });
