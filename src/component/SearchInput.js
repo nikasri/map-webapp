@@ -24,7 +24,7 @@ export default class SearchInput extends React.Component{
                 placeholder="Search Google Maps"
                 inputProps={{ 'aria-label': 'search google maps' }}
             />
-            <IconButton color="primary" sx={{ p: '10px' }} aria-label="search">
+            <IconButton title="Search"color="primary" sx={{ p: '10px' }} aria-label="search">
                 <SearchIcon />
             </IconButton>
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
